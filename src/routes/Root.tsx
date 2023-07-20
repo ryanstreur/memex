@@ -32,6 +32,11 @@ export default function Root() {
               </li>
             ))}
           </ul>
+          <ul>
+            <li>
+              <Link to="/settings">Settings</Link>
+            </li>
+          </ul>
         </nav>
         <div className="detail">
           <Outlet></Outlet>
