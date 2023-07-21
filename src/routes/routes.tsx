@@ -3,14 +3,14 @@ import NodeList from "./NodeList";
 import NodeDetail from "./NodeDetail";
 import RelationshipList from "./RelationshipList";
 import RelationshipDetail from "./RelationshipDetail";
-import { UserSettings } from "./UserSettings";
+import { UserSettingsPage } from "./UserSettings";
 
 export const routes = [
   {
     path: "/",
     element: <Root />,
     children: [
-      { path: "settings", element: <UserSettings /> },
+      { path: "settings", element: <UserSettingsPage /> },
       { path: "nodes", element: <NodeList /> },
       {
         path: "nodes/:nodeId",

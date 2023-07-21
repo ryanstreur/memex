@@ -42,3 +42,21 @@ export function identify(entity: Identified) {
     entity.id = uuidV4();
   }
 }
+
+export interface IUserSettings {
+  keyboardShortcutsEnabled: boolean;
+}
+
+export class UserSettings implements IUserSettings {
+  keyboardShortcutsEnabled: boolean;
+
+  constructor() {
+    this.keyboardShortcutsEnabled = false;
+  }
+}
+
+export enum LoadStatus {
+  Unloaded,
+  Loading,
+  Loaded,
+}

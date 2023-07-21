@@ -7,10 +7,11 @@ import {
 } from "./model";
 
 // localStorage Keys
-const LS_KEYS = {
+export const LS_KEYS = {
   NODES: "nodes",
   EDGES: "edges",
   RELS: "relationships",
+  SETTINGS: "settings",
 };
 
 export function initializeLocalStorage() {
@@ -63,4 +64,19 @@ export function addOrUpdateRelationship(rel: IRelationship) {
 export function getRelationship(relId: string): IRelationship {
   const rels = getRels();
   return rels[relId];
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function saveToLocalStorage(key: string, value: any) {
+  const valueString = JSON.stringify(value);
+  localStorage.setItem(key, valueString);
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function getFromLocalStorage(key: string): any {
+  const valueString: string | null = localStorage.getItem(key);
+  if (!valueString) {
+    return;
+  }
+  return JSON.parse(valueString);
 }
