@@ -1,4 +1,4 @@
-import { INode } from "./model";
+import { INode } from "../model";
 
 type NodeProps = {
   node: INode;

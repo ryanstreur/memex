@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 
-import { addOrUpdateNode } from "./persistence";
+import { addOrUpdateNode } from "../persistence";
 
 export const NodeForm = () => {
   const [name, setTitle] = useState("");
@@ -27,8 +27,7 @@ export const NodeForm = () => {
           placeholder="Name"
           onChange={(e) => setTitle(e.target.value)}
         />
-        <input
-          type="text"
+        <textarea
           name="body"
           value={body}
           placeholder="Body"
