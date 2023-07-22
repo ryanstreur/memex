@@ -9,6 +9,9 @@ export default function Root() {
   const relsList = getRelsList();
   return (
     <>
+      <a className="skip-to-content-link" href="#main">
+        Skip to content
+      </a>
       <h1>Memex</h1>
       <div className="flex">
         <nav>
@@ -38,9 +41,9 @@ export default function Root() {
             </li>
           </ul>
         </nav>
-        <div className="detail">
+        <main id="main" className="detail">
           <Outlet></Outlet>
-        </div>
+        </main>
       </div>
     </>
   );
