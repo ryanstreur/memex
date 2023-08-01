@@ -1,4 +1,3 @@
-import { ReducerAction } from "react";
 import { IUserSettings } from "../model";
 import {
   getFromLocalStorage,

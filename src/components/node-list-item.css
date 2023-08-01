@@ -1,0 +1,17 @@
+.node-list {
+  margin: 0;
+  padding: 0;
+}
+
+.node-list-item {
+  list-style: none;
+  padding: 0.5em;
+}
+
+.node-li-link {
+  background-color: lightgray;
+}
+
+.node-li-link:focus, .node-li-link:hover {
+  background-color: darkgray;
+}

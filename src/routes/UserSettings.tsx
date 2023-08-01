@@ -1,10 +1,9 @@
-import { FormEvent, useEffect, useReducer, useState } from "react";
+import { FormEvent, useEffect, useReducer } from "react";
 import {
   SettingsActionType,
   defaultSettings,
   settingsReducer,
 } from "../reducers/settings-reducer";
-import { IUserSettings } from "../model";
 
 export function UserSettingsPage() {
   const [settings, dispatch] = useReducer(settingsReducer, defaultSettings);

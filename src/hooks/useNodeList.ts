@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { INodeMap } from "../model";
+import { INode, INodeMap } from "../model";
 
 export default function useNodeList(): [INode[], string] {
   const emptyNodeList: INode[] = [];

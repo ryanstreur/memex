@@ -1,11 +1,11 @@
 import { Outlet, Link } from "react-router-dom";
 import "../App.css";
-import { INode } from "../model";
 import useNodeList from "../hooks/useNodeList";
 import { getRelsList } from "../persistence";
+import NodeList from "../components/NodeList";
 
 export default function Root() {
-  const [nodeList, status] = useNodeList();
+  const [nodeList] = useNodeList();
   const relsList = getRelsList();
   return (
     <>
@@ -18,13 +18,7 @@ export default function Root() {
           <h2>
             <Link to="nodes">Nodes</Link>
           </h2>
-          <ul>
-            {nodeList.map((node: INode) => (
-              <li key={node.id}>
-                <Link to={`/nodes/${node.id}`}>{node.name}</Link>
-              </li>
-            ))}
-          </ul>
+          <NodeList nodes={nodeList} />
           <h2>
             <Link to="/relationships">Relationships</Link>
           </h2>

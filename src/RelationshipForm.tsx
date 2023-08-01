@@ -9,6 +9,7 @@ type RelFormProps = {
 export const RelationshipForm = (props: RelFormProps) => {
   const [name, setName] = useState("");
   const { relationship } = props;
+  console.log(relationship);
 
   const submitForm: React.FormEventHandler<HTMLElement> = (e) => {
     e.preventDefault();
