@@ -14,10 +14,10 @@ export const LS_KEYS = {
   SETTINGS: "settings",
 };
 
-export function initializeLocalStorage() {
-  const KEYS = ["nodes", "edges", "relationships"];
+export const LOCALSTORAGE_KEYS = ["nodes", "edges", "relationships"];
 
-  for (const key of KEYS) {
+export function initializeLocalStorage() {
+  for (const key of LOCALSTORAGE_KEYS) {
     if (localStorage.getItem(key)) {
       continue;
     }
@@ -72,11 +72,12 @@ export function saveToLocalStorage(key: string, value: any) {
   localStorage.setItem(key, valueString);
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export function getFromLocalStorage(key: string): any {
+export function getFromLocalStorage<OutputType>(
+  key: string
+): OutputType | null {
   const valueString: string | null = localStorage.getItem(key);
   if (!valueString) {
-    return;
+    return null;
   }
-  return JSON.parse(valueString);
+  return JSON.parse(valueString) as OutputType;
 }

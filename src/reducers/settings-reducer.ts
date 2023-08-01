@@ -11,7 +11,7 @@ export const defaultSettings: IUserSettings = {
 };
 
 export function loadSettings(): IUserSettings {
-  const output = getFromLocalStorage(LS_KEYS.SETTINGS) as IUserSettings;
+  const output = getFromLocalStorage<IUserSettings>(LS_KEYS.SETTINGS);
   console.log("loading settings:", output);
   return output || defaultSettings;
 }
