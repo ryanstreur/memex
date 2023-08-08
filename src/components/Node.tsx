@@ -1,7 +1,7 @@
-import { INode } from "../model";
+import { IMxNode } from "../model";
 
 type NodeProps = {
-  node: INode;
+  node: IMxNode;
 };
 export const Node = ({ node }: NodeProps) => {
   return <h1>{node.name}</h1>;

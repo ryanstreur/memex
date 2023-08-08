@@ -1,40 +1,42 @@
-import React from "react";
-import { useState } from "react";
+import { FormEventHandler, useState } from "react";
+import { IMxNode } from "../model";
+import { useNavigate } from "react-router-dom";
 
-import { addOrUpdateNode } from "../persistence";
+type PropTypes = {
+  node: IMxNode;
+  updateNode: (node: IMxNode) => void;
+};
+export default function NodeForm(props: PropTypes) {
+  const { node, updateNode } = props;
 
-export const NodeForm = () => {
-  const [name, setTitle] = useState("");
-  const [body, setBody] = useState("");
+  const [name, setName] = useState(node.name);
+  const [body, setBody] = useState(node.body);
 
-  const submitForm: React.FormEventHandler<HTMLElement> = (e) => {
+  const submitForm: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
-    addOrUpdateNode({
-      id: "",
-      name,
-      body,
-    });
+    updateNode({ ...node, name, body });
   };
 
   return (
-    <section>
-      <h1>Add Node</h1>
-      <form onSubmit={submitForm}>
+    <>
+      <form onSubmit={(e) => submitForm(e)}>
+        <label htmlFor="node-name">Name</label>
         <input
+          name="node-name"
           type="text"
-          name="title"
           value={name}
-          placeholder="Name"
-          onChange={(e) => setTitle(e.target.value)}
+          onChange={(e) => setName(e.target.value)}
         />
+        <label htmlFor="node-body">Body</label>
         <textarea
-          name="body"
+          name="node-body"
+          id="node-body"
           value={body}
-          placeholder="Body"
           onChange={(e) => setBody(e.target.value)}
-        />
+        ></textarea>
         <button type="submit">Submit</button>
       </form>
-    </section>
+      {JSON.stringify(node)}
+    </>
   );
-};
+}

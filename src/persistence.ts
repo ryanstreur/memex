@@ -1,8 +1,8 @@
 import {
-  INode,
-  INodeMap,
-  IRelationship,
-  IRelationshipMap,
+  IMxNode,
+  IMxNodeMap,
+  IMxRelationship,
+  IMxRelationshipMap,
   identify,
 } from "./model";
 
@@ -26,25 +26,25 @@ export function initializeLocalStorage() {
   }
 }
 
-export function addOrUpdateNode(node: INode) {
+export function addOrUpdateNode(node: IMxNode) {
   identify(node);
   const nodesString = localStorage.getItem("nodes") as string;
-  const nodes = JSON.parse(nodesString) as INodeMap;
+  const nodes = JSON.parse(nodesString) as IMxNodeMap;
   nodes[node.id] = node;
   localStorage.nodes = JSON.stringify(nodes);
 }
 
-export function getNode(nodeId: string): INode {
-  const nodes = JSON.parse(
-    localStorage.getItem(LS_KEYS.NODES) || ""
-  ) as INodeMap;
+export function getNode(nodeId: string): IMxNode {
+  const nodes = getFromLocalStorage<IMxNodeMap>(LS_KEYS.NODES) || {};
 
   return nodes[nodeId];
 }
 
 function getRels() {
   const relsString: string = localStorage.getItem(LS_KEYS.RELS) || "";
-  const relsMap: IRelationshipMap = JSON.parse(relsString) as IRelationshipMap;
+  const relsMap: IMxRelationshipMap = JSON.parse(
+    relsString
+  ) as IMxRelationshipMap;
   return relsMap;
 }
 
@@ -53,15 +53,15 @@ export function getRelsList() {
   return Object.values(relationships);
 }
 
-export function addOrUpdateRelationship(rel: IRelationship) {
+export function addOrUpdateRelationship(rel: IMxRelationship) {
   identify(rel);
   const relsString = localStorage.getItem(LS_KEYS.RELS) as string;
-  const rels = JSON.parse(relsString) as IRelationshipMap;
+  const rels = JSON.parse(relsString) as IMxRelationshipMap;
   rels[rel.id] = rel;
   localStorage.setItem(LS_KEYS.RELS, JSON.stringify(rels));
 }
 
-export function getRelationship(relId: string): IRelationship {
+export function getRelationship(relId: string): IMxRelationship {
   const rels = getRels();
   return rels[relId];
 }
@@ -72,6 +72,11 @@ export function saveToLocalStorage(key: string, value: any) {
   localStorage.setItem(key, valueString);
 }
 
+export function saveNodes(nodes: IMxNodeMap) {
+  const valueString = JSON.stringify(nodes);
+  localStorage.setItem(LS_KEYS.NODES, valueString);
+}
+
 export function getFromLocalStorage<OutputType>(
   key: string
 ): OutputType | null {
@@ -80,4 +85,8 @@ export function getFromLocalStorage<OutputType>(
     return null;
   }
   return JSON.parse(valueString) as OutputType;
+}
+
+export function storageEstimate() {
+  return navigator.storage.estimate();
 }

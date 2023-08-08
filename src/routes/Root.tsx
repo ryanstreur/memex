@@ -1,12 +1,27 @@
-import { Outlet, Link } from "react-router-dom";
-import "../App.css";
-import useNodeList from "../hooks/useNodeList";
-import { getRelsList } from "../persistence";
+import { Link, Outlet } from "react-router-dom";
 import NodeList from "../components/NodeList";
+import "../App.css";
+
+import { useEffect } from "react";
+import {
+  useKnowledgeGraph,
+  useKnowledgeGraphDispatch,
+} from "../contexts/knowledge-graph-context";
+import { KgActions } from "../reducers/knowledge-graph-reducer";
 
 export default function Root() {
-  const [nodeList] = useNodeList();
-  const relsList = getRelsList();
+  const knowledgeGraph = useKnowledgeGraph();
+  const kgDispatch = useKnowledgeGraphDispatch();
+
+  useEffect(() => {
+    kgDispatch({
+      type: KgActions.LOAD,
+    });
+  }, [kgDispatch]);
+
+  const nodesFromGraph = Object.values(knowledgeGraph.nodes);
+  const relsFromGraph = Object.values(knowledgeGraph.relationships);
+
   return (
     <>
       <a className="skip-to-content-link" href="#main">
@@ -18,12 +33,13 @@ export default function Root() {
           <h2>
             <Link to="nodes">Nodes</Link>
           </h2>
-          <NodeList nodes={nodeList} />
+          <Link to="nodes/create">New Node</Link>
+          <NodeList nodes={nodesFromGraph} />
           <h2>
             <Link to="/relationships">Relationships</Link>
           </h2>
           <ul>
-            {relsList.map((rel) => (
+            {relsFromGraph.map((rel) => (
               <li key={rel.id}>
                 <Link to={`/relationships/${rel.id}`}>{rel.name}</Link>
               </li>

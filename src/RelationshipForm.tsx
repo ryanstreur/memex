@@ -1,10 +1,10 @@
 import React from "react";
 import { useState } from "react";
-import { IRelationship } from "./model";
+import { IMxRelationship } from "./model";
 import { addOrUpdateRelationship } from "./persistence";
 
 type RelFormProps = {
-  relationship?: IRelationship;
+  relationship?: IMxRelationship;
 };
 export const RelationshipForm = (props: RelFormProps) => {
   const [name, setName] = useState("");

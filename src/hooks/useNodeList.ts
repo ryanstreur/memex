@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
-import { INode, INodeMap } from "../model";
+import { IMxNode, IMxNodeMap } from "../model";
 
-export default function useNodeList(): [INode[], string] {
-  const emptyNodeList: INode[] = [];
+export default function useNodeList(): [IMxNode[], string] {
+  const emptyNodeList: IMxNode[] = [];
   const [nodeList, setNodeList] = useState(emptyNodeList);
   const [status, setStatus] = useState("unloaded");
 
   useEffect(() => {
     const nodeMapString: string = localStorage.getItem("nodes") || "";
-    const nodeMap = JSON.parse(nodeMapString) as INodeMap;
+    const nodeMap = JSON.parse(nodeMapString) as IMxNodeMap;
 
     setNodeList(Object.values(nodeMap));
     setStatus("loaded");
